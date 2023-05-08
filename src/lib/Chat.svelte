@@ -34,7 +34,7 @@
   const modelSetting: Settings & SettingsSelect = {
     key: 'model',
     name: 'Model',
-    default: 'gpt-3.5-turbo',
+    default: 'gpt-4',
     title: 'The model to use - GPT-3.5 is cheaper, but GPT-4 is more powerful.',
     options: supportedModels,
     type: 'select'
