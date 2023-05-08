@@ -45,7 +45,7 @@
     {
       key: 'temperature',
       name: 'Sampling Temperature',
-      default: 1,
+      default: 0.6,
       title: 'What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\n' +
               '\n' +
               'We generally recommend altering this or top_p but not both.',
@@ -181,6 +181,7 @@
           if (value) {
             acc[setting.key] = setting.type === 'number' ? parseFloat(value) : value
           }
+          
           return acc
         }, {})
       }
@@ -458,7 +459,20 @@
           </div>
           <div class="field-body">
             <div class="field">
-              {#if setting.type === 'number'}
+              {#if setting.key === 'temperature'}
+                <input
+                  class="input"
+                  inputmode="decimal"
+                  type={setting.type}
+                  title="{setting.title}"
+                  id="settings-{setting.key}"
+                  min={setting.min}
+                  max={setting.max}
+                  step={setting.step}
+                  placeholder={String(setting.default)}
+                  value={setting.default}
+                />
+              {:else if setting.type === 'number'}
                 <input
                   class="input"
                   inputmode="decimal"
@@ -478,6 +492,7 @@
                     {/each}
                   </select>
                 </div>
+              
               {/if}
             </div>
           </div>
